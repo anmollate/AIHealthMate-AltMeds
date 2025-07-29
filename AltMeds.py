@@ -1,25 +1,42 @@
 import pandas as pd
 import streamlit as st
 
-df=pd.read_excel('Medicine Dataset.xlsx')
+# Load data
+df = pd.read_excel('Medicine.xlsx')
 
-st.subheader("Search Medicines🔍💊")
-MedName=st.text_input("Enter The Name Of Medicine: ")
+# Title
+st.markdown("## 💊Search For Your Desired Medicines")
 
-row_matched=df[df['Product Name'].str.lower()==MedName.lower()]
+# Input field
+MedName = st.text_input("🔍 Enter the name of the medicine:")
 
-if not row_matched.empty:
-    salt_composition=row_matched.iloc[0]['salt_composition']
-    st.write("Contents: ",salt_composition)
-    usage=row_matched.iloc[0]['primary_use']
-    st.write("Primary Usage: ",usage)
+# Process if user enters input
+if MedName:
+    row_matched = df[df['Name'].str.lower() == MedName.lower()]
 
-    similar_meds=df[df['salt_composition'].str.lower()==salt_composition.lower()]
+    if not row_matched.empty:
+        st.success("✅ Medicine Found!")
 
-    if not similar_meds.empty and len(similar_meds)!=1:
-        for _,row in similar_meds.iterrows():
-            st.write("Alternate Medicines: ",row['Product Name'],"     Contents: ",row['salt_composition'])
+        # Display primary info
+        imagepath="images/"+row_matched.iloc[0]['Image']
+        st.image(imagepath, caption=row_matched.iloc[0]['Image'], width=250)
+        st.markdown(f"**🏭 Marketer:** {row_matched.iloc[0]['Marketer']}")
+        st.markdown(f"**🧪 Contents:** {row_matched.iloc[0]['Contents']}")
+        st.markdown(f"**📌 Primary Usage:** {row_matched.iloc[0]['Primary Usage']}")
+        st.markdown(f"**💵 Price: ₹** {row_matched.iloc[0]['Mrp']} **/-**")
+
+        # Search for alternatives
+        salt = row_matched.iloc[0]['Contents'].lower()
+        similar_meds = df[(df['Contents'].str.lower() == salt) & (df['Name'].str.lower() != MedName.lower())]
+
+        # Display alternatives
+        if not similar_meds.empty:
+            st.markdown("### 🔁 Alternative Medicines:")
+            for _, row in similar_meds.iterrows():
+                imagepath="images/"+row['Image']
+                st.image(imagepath, caption=row['Name'], width=250)
+                st.markdown(f"- **{row['Name']}** &nbsp;&nbsp; _({row['Contents']})_")
+        else:
+            st.warning("⚠️ No alternative medicines available at the moment.")
     else:
-        st.write("No Alternatives Availabel At The Moment !")
-else:
-    st.write("Med Not Found!")
+        st.error("❌ Medicine not found!")
