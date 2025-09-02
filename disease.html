@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disease Predictor — AI Health Mate</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .shell { max-width: 1100px; width: 92vw; margin: 40px auto; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .tab-btn {
+      padding: 10px 16px; border: 0; border-radius: 999px; cursor: pointer;
+      color: #fff; background: rgba(255,255,255,0.16); backdrop-filter: blur(8px);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .tab-btn.active { background: linear-gradient(90deg,#4facfe,#00f2fe); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+    .tab-btn:hover { transform: translateY(-2px); }
+
+    .panel { display: none; gap: 14px; }
+    .panel.active { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
+
+    .card {
+      background: rgba(255,255,255,0.15); color: #fff; border-radius: 18px; padding: 18px;
+      backdrop-filter: blur(14px); box-shadow: 0 8px 28px rgba(0,0,0,.22);
+    }
+    .panel h3 { grid-column: 1 / -1; margin-bottom: 4px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
+    .field label { font-size: .95rem; opacity: .95; }
+    .field input, .field select {
+      padding: 11px 12px; border: none; border-radius: 10px; outline: none; font-size: 1rem;
+      background: rgba(255,255,255,0.9); color: #222;
+    }
+
+    .action-row { grid-column: 1 / -1; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .pill {
+      padding: 10px 16px; border-radius: 999px; background: linear-gradient(90deg,#4facfe,#00f2fe);
+      color: #fff; border: none; cursor: pointer; transition: transform .2s, box-shadow .2s;
+    }
+    .pill:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,.25); }
+
+    .result {
+      grid-column: 1 / -1; padding: 14px 16px; border-radius: 12px; font-weight: 700; text-align: center;
+    }
+    .ok    { background: #2e7d32; }
+    .warn  { background: #f9a825; }
+    .crit  { background: #c62828; }
+
+    .tip { grid-column: 1 / -1; font-size: .9rem; opacity: .9; }
+    .tiny { font-size: .78rem; opacity: .8; margin-top: 6px; line-height: 1.35; }
+    .book-btn {
+      display: inline-block; margin-top: 8px; padding: 8px 14px; background: #fff; color: #000;
+      border-radius: 6px; text-decoration: none; font-size: .9rem; font-weight: bold;
+    }
+
+    .head {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; margin-bottom: 16px;
+    }
+    .brand h1 { font-size: 2rem; color: #fff; margin-bottom: 6px; }
+    .brand p { color: #e8f7ff; opacity: .9; }
+    .to-dashboard { justify-self: end; }
+    .to-dashboard a {
+      text-decoration: none; color: #003e57; background: #fff; padding: 10px 14px; border-radius: 10px;
+    }
+
+    @media (max-width: 880px){
+      .head { grid-template-columns: 1fr; gap: 10px; }
+      .to-dashboard { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="shell">
+    <div class="head">
+      <div class="brand">
+        <h1>AI Health Mate — Disease Predictor</h1>
+        <p>Enter lab/vital values to estimate risk levels. (Educational use only)</p>
+      </div>
+      <div class="to-dashboard">
+        <a href="index.html">← Back</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="heart">Heart</button>
+        <button class="tab-btn" data-tab="liver">Liver</button>
+        <button class="tab-btn" data-tab="kidney">Kidney</button>
+        <button class="tab-btn" data-tab="anemia">Anemia</button>
+        <button class="tab-btn" data-tab="diabetes">Diabetes</button>
+        <button class="tab-btn" data-tab="typhoid">Typhoid</button>
+        <button class="tab-btn" data-tab="malaria">Malaria</button>
+        <button class="tab-btn" data-tab="dengue">Dengue</button>
+      </div>
+
+      <!-- Heart -->
+      <div id="heart" class="panel active">
+        <h3>Heart Disease Risk</h3>
+        <div class="field"><label>Total Cholesterol</label><input id="h_tc" type="number"/></div>
+        <div class="field"><label>LDL</label><input id="h_ldl" type="number"/></div>
+        <div class="field"><label>HDL</label><input id="h_hdl" type="number"/></div>
+        <div class="field"><label>Systolic BP</label><input id="h_sbp" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkHeart()">Check</button>
+          <div id="h_res" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Liver -->
+      <div id="liver" class="panel">
+        <h3>Liver Health</h3>
+        <div class="field"><label>Age</label><input id="Age" type="number"/></div>
+        <div class="field"><label>Total Bilirubin</label><input id="TB" type="number"/></div>
+        <div class="field"><label>Direct Bilirubin</label><input id="DB" type="number"/></div>
+        <div class="field"><label>Alkaline Phosphatase</label><input id="AP" type="number"/></div>
+        <div class="field"><label>Alanine Aminotransferase</label><input id="ALA" type="number"/></div>
+        <div class="field"><label>Aspartate Aminotransferase</label><input id="ASA" type="number"/></div>
+        <div class="field"><label>Total Proteins</label><input id="TP" type="number"/></div>
+        <div class="field"><label>Albumin</label><input id="ALB" type="number"/></div>
+        <div class="field"><label>Albumin And Globulin Ratio</label><input id="AGR" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkLiver()">Check</button>
+          <div id="l_res" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Kidney -->
+      <div id="kidney" class="panel">
+        <h3>Kidney Health</h3>
+        <div class="field"><label>Creatinine</label><input id="CREAT" type="number"/></div>
+        <div class="field"><label>BUN/Urea</label><input id="BUN" type="number"/></div>
+        <div class="field"><label>eGFR</label><input id="EGFR" type="number"/></div>
+        <div class="field"><label>Potassium</label><input id="POTA" type="number"/></div>
+        <div class="field"><label>Bicarbonate</label><input id="BICAR" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkKidney()">Check</button>
+          <div id="K_res" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Anemia -->
+      <div id="anemia" class="panel">
+        <h3>Anemia Risk</h3>
+        <div class="field"><label>Hemoglobin(g/dL)</label><input id="HEM" type="number"/></div>
+        <div class="field"><label>Hematocrit (%)</label><input id="HEMA" type="number"/></div>
+        <div class="field"><label>MCV (fL)</label><input id="MCV" type="number"/></div>
+        <div class="field"><label>MCH (pg)</label><input id="MCH" type="number"/></div>
+        <div class="field"><label>RDW (%)</label><input id="RDW" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkAnemia()">Check</button>
+          <div id="An_res" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Diabetes -->
+      <div id="diabetes" class="panel">
+        <h3>Diabetes Risk</h3>
+        <div class="field"><label>Glucose</label><input id="GLUC" type="number"/></div>
+        <div class="field"><label>Blood Pressure</label><input id="BP" type="number"/></div>
+        <div class="field"><label>Skin Thickness</label><input id="ST" type="number"/></div>
+        <div class="field"><label>Insulin</label><input id="INS" type="number"/></div>
+        <div class="field"><label>Body Mass Index</label><input id="BMI" type="number"/></div>
+        <div class="field"><label>Diabetes Pedigree Function</label><input id="DPF" type="number"/></div>
+        <div class="field"><label>Age</label><input id="AGE" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkDiabetes()">Check</button>
+          <div id="d_res" class="result"></div>
+        </div>
+      </div>
+
+      <!-- Typhoid -->
+      <!-- <div id="typhoid" class="panel">
+        <h3>Typhoid Risk</h3>
+        <div class="field"><label>Widal O titre</label><input id="t_o" type="number"/></div>
+        <div class="field"><label>Widal H titre</label><input id="t_h" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkTyphoid()">Check</button>
+          <div id="t_res" class="result"></div>
+        </div>
+      </div> -->
+
+      <!-- Malaria -->
+      <!-- <div id="malaria" class="panel">
+        <h3>Malaria Risk</h3>
+        <div class="field"><label>Parasite Test Result</label>
+          <select id="m_test"><option>Negative</option><option>Positive</option></select>
+        </div>
+        <div class="action-row">
+          <button class="pill" onclick="checkMalaria()">Check</button>
+          <div id="m_res" class="result"></div>
+        </div>
+      </div> -->
+
+      <!-- Dengue -->
+      <!-- <div id="dengue" class="panel">
+        <h3>Dengue Risk</h3>
+        <div class="field"><label>NS1 Antigen</label>
+          <select id="dn_ns1"><option>Negative</option><option>Positive</option></select>
+        </div>
+        <div class="field"><label>Platelet Count</label><input id="dn_platelet" type="number"/></div>
+        <div class="action-row">
+          <button class="pill" onclick="checkDengue()">Check</button>
+          <div id="dn_res" class="result"></div>
+        </div>
+      </div> -->
+
+      <p class="tip tiny">⚠️ This tool is for educational purposes only. Consult a doctor for a medical diagnosis.</p>
+    </div>
+  </div>
+
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.panel');
+tabs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabs.forEach(b => b.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// Auto-save
+document.querySelectorAll('input,select').forEach(el=>{
+  const key = el.id;
+  if(localStorage.getItem(key)) el.value = localStorage.getItem(key);
+  el.addEventListener('input',()=> localStorage.setItem(key, el.value));
+});
+
+function setResult(id, level, msg){
+  const el = document.getElementById(id);
+  el.className = 'result '+level;
+  el.innerHTML = msg;
+  if(level === 'crit'){
+    el.innerHTML += `<br><a class="book-btn" href="https://www.practo.com" target="_blank">Book Doctor Appointment</a>`;
+  }
+}
+
+// Logic
+function checkHeart(){
+  const tc = +document.getElementById('h_tc').value;
+  const ldl = +document.getElementById('h_ldl').value;
+  const hdl = +document.getElementById('h_hdl').value;
+  const sbp = +document.getElementById('h_sbp').value;
+  if([tc,ldl,hdl,sbp].some(isNaN)) return setResult('h_res','warn','Fill all values');
+  let score=0;
+  if(tc>200) score++;
+  if(ldl>130) score++;
+  if(hdl<40) score++;
+  if(sbp>140) score++;
+  if(score>=3) setResult('h_res','crit','🚨 High Heart Risk');
+  else if(score>=1) setResult('h_res','warn','⚠ Moderate Heart Risk');
+  else setResult('h_res','ok','✅ Low Heart Risk');
+}
+function checkLiver(){
+  let Age=document.getElementById("Age").value;
+  let Total_Bilirubin=document.getElementById("TB").value;
+  let Direct_Bilirubin=document.getElementById("DB").value;
+  let Alkaline_Phosphatase=document.getElementById("AP").value;
+  let Alanine_Aminotransferase=document.getElementById("ALA").value;
+  let Aspartate_Aminotransferase=document.getElementById("ASA").value;
+  let Total_Proteins=document.getElementById("TP").value;
+  let Albumin=document.getElementById("ALB").value;
+  let Albumin_And_Globulin_Ratio=document.getElementById("AGR").value;
+  if([Age,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphatase,Alanine_Aminotransferase,Aspartate_Aminotransferase,Total_Proteins,Albumin,Albumin_And_Globulin_Ratio].some(isNaN)) return setResult('l_res','warn','Fill All The Values!')
+
+  let data={
+    Age:Age,
+    Total_Bilirubin:Total_Bilirubin,
+    Direct_Bilirubin:Direct_Bilirubin,
+    Alkaline_Phosphatase:Alkaline_Phosphatase,
+    Alanine_Aminotransferase:Alanine_Aminotransferase,
+    Aspartate_Aminotransferase:Aspartate_Aminotransferase,
+    Total_Proteins:Total_Proteins,
+    Albumin:Albumin,
+    Albumin_And_Globulin_Ratio:Albumin_And_Globulin_Ratio
+  };
+
+  fetch("http://127.0.0.1:5000/LiverDiseasePredict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
+    console.log("Response from Flask:", response);
+    if(response=="1") setResult('l_res','crit','🚨 Liver Health: Poor!')
+    else setResult('l_res','ok','Liver Health: Good!')
+  })
+  .catch(error => console.error("Error:", error));
+
+
+}
+function checkKidney(){
+  let Creatinine=document.getElementById("CREAT").value;
+  let BUN=document.getElementById("BUN").value;
+  let eGFR=document.getElementById("EGFR").value;
+  let Potassium=document.getElementById("POTA").value;
+  let Bicarbonate=document.getElementById("BICAR").value;
+
+  let data={
+    Creatinine: Creatinine,
+    BUN: BUN,
+    eGFR: eGFR,
+    Potassium: Potassium,
+    Bicarbonate: Bicarbonate
+  };
+
+      fetch("http://127.0.0.1:5000/KidneyDiseasePredict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
+    console.log("Response from Flask:", response);
+    if (response=== "Severe Kidney Damage") setResult('K_res','crit','🚨 Severe Kidney Damage!');
+    else if (response=== "Moderate Kidney Damage") setResult('K_res','warn','🚨 Moderate Kidney Damage!');
+    else if (response==="Normal or Mild Kidney Damage")setResult('K_res','ok','✅Normal or Mild Kidney Damage')
+  })
+  .catch(error => console.error("Error:", error));
+
+
+}
+function checkAnemia(){
+  let hemoglobin=document.getElementById("HEM").value;
+  let hematocrit=document.getElementById("HEMA").value;
+  let MCV=document.getElementById("MCV").value;
+  let MCH=document.getElementById("MCH").value;
+  let RDW=document.getElementById("RDW").value;
+
+  let data={
+    hemoglobin: hemoglobin,
+    hematocrit: hematocrit,
+    MCV: MCV,
+    MCH: MCH,
+    RDW: RDW
+  };
+
+    fetch("http://127.0.0.1:5000/AnemiaPredict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
+    console.log("Response from Flask:", response);
+    if (response=== "Normocytic Anemia") setResult('An_res','crit','🚨 Normocytic Anemia Detected!');
+    else if (response=== "Microcytic Anemia") setResult('An_res','crit','🚨 Microcytic Anemia Detected!');
+    else setResult('An_res','ok','✅ No Anemia Detected!')
+  })
+  .catch(error => console.error("Error:", error));
+
+}
+
+function checkDiabetes(){
+  let Glucose=document.getElementById("GLUC").value;
+  let BP=document.getElementById("BP").value;
+  let ST=document.getElementById("ST").value;
+  let INS=document.getElementById("INS").value;
+  let BMI=document.getElementById("BMI").value;
+  let DPF=document.getElementById("DPF").value;
+  let Age=document.getElementById("AGE").value;
+
+  let data={
+    Glucose: Glucose,
+    BP: BP,
+    ST: ST,
+    INS: INS,
+    BMI: BMI,
+    DPF: DPF,
+    Age: Age
+  };
+
+  fetch("http://127.0.0.1:5000/DiabetesPredict", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
+    console.log("Response from Flask:", response);
+    if (response=== "Positive") setResult('d_res','crit','🚨 High Risk Of Diabetes!');
+    else setResult('d_res','ok','✅ No Diabetes Detected!')
+  })
+  .catch(error => console.error("Error:", error));
+
+}
+
+function checkTyphoid(){
+  const o=+document.getElementById('t_o').value;
+  const h=+document.getElementById('t_h').value;
+  if([o,h].some(isNaN)) return setResult('t_res','warn','Fill values');
+  if(o>=160||h>=160) setResult('t_res','crit','🚨 Likely Typhoid Infection');
+  else if(o>=80||h>=80) setResult('t_res','warn','⚠ Possible Typhoid — Retest');
+  else setResult('t_res','ok','✅ No Typhoid');
+}
+function checkMalaria(){
+  const test=document.getElementById('m_test').value;
+  if(test==='Positive') setResult('m_res','crit','🚨 Malaria Positive');
+  else setResult('m_res','ok','✅ Malaria Negative');
+}
+function checkDengue(){
+  const ns1=document.getElementById('dn_ns1').value;
+  const plt=+document.getElementById('dn_platelet').value;
+  if(isNaN(plt)) return setResult('dn_res','warn','Fill platelet count');
+  if(ns1==='Positive'||plt<100000) setResult('dn_res','crit','🚨 Dengue Positive or Low Platelets');
+  else if(plt<150000) setResult('dn_res','warn','⚠ Mild Thrombocytopenia');
+  else setResult('dn_res','ok','✅ Normal');
+}
+</script>
+</body>
+</html>
