@@ -6,3 +6,4 @@ joblib
 pillow
 pytesseract
 opencv-python
+gunicorn
