@@ -9,7 +9,6 @@ import pytesseract
 import cv2
 import io
 import os
-import easyocr
 
 app = Flask(__name__)
 CORS(app)
