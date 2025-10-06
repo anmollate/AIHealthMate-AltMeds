@@ -8,16 +8,22 @@ from PIL import Image
 import pytesseract
 import cv2
 import io
+import os
+import easyocr
 
 app = Flask(__name__)
 CORS(app)
 
 # Load the saved model
-Diabetesmodel = joblib.load("Models/ImprovedDiabetesModel.pkl")
-Anemiamodel= joblib.load("Models/Anemia_Model.pkl")
-KidneyDiseaseModel=joblib.load("Models/KidneyDisease_Model.pkl")
-LiverDiseaseModel=joblib.load("Models/Liver_Disease_Model.pkl")
-HeartDiseaseModel=joblib.load("Models/HeartDisease_Model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "Models")
+
+# Load all models with absolute paths
+Diabetesmodel = joblib.load(os.path.join(MODELS_DIR, "ImprovedDiabetesModel.pkl"))
+Anemiamodel = joblib.load(os.path.join(MODELS_DIR, "Anemia_Model.pkl"))
+KidneyDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "KidneyDisease_Model.pkl"))
+LiverDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "Liver_Disease_Model.pkl"))
+HeartDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "HeartDisease_Model.pkl"))
 
 pattern = r"([A-Za-z ()]+)[^\d]*([\d]+\.?\d*)[^\d]+([\d]+\.?\d*)-([\d]+\.?\d*)"
 

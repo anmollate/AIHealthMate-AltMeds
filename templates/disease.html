@@ -252,7 +252,7 @@ function checkLiver(){
     Albumin_And_Globulin_Ratio:Albumin_And_Globulin_Ratio
   };
 
-  fetch("http://127.0.0.1:5000/LiverDiseasePredict", {
+  fetch("http://192.168.0.102:5000/LiverDiseasePredict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -287,7 +287,7 @@ function checkKidney(){
     Bicarbonate: Bicarbonate
   };
 
-      fetch("http://127.0.0.1:5000/KidneyDiseasePredict", {
+      fetch("http://192.168.0.102:5000/KidneyDiseasePredict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -334,7 +334,7 @@ function checkDiabetes(){
     Age: Age
   };
 
-  fetch("http://127.0.0.1:5000/DiabetesPredict", {
+  fetch("http://192.168.0.102:5000/DiabetesPredict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -366,7 +366,7 @@ function checkAnemia(){
     RDW: RDW
   };
 
-    fetch("http://127.0.0.1:5000/AnemiaPredict", {
+    fetch("http://192.168.0.102:5000/AnemiaPredict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
