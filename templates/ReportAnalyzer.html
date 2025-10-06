@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Health Report Analyzer</title>
+
+  <!-- two CSS files included -->
+  <link rel="stylesheet" href="static/css/style1.css" />
+  <link rel="stylesheet" href="static/css/theme.css" />
+  <link rel="stylesheet" href="static/css/style.css" />
+
+  <!-- Chart.js for plots -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  {% include "navbar.html" %}
+  <div class="container">
+    <h1>HEALTH REPORT ANALYZER 🩺📊</h1>
+
+    <label class="upload-label" for="fileInput">Upload Your Blood Report Image:</label>
+    <input id="fileInput" type="file" accept="image/png, image/jpeg, image/webp" />
+
+    <div id="preview" class="preview"></div>
+
+    <div id="controls">
+      <button id="sendBtn" disabled>Analyze</button>
+    </div>
+
+    <div id="results"></div>
+
+    <details style="margin-top:12px;">
+      <summary>Raw OCR text</summary>
+      <pre id="rawText" class="rawtext"></pre>
+    </details>
+  </div>
+
+  <script src="static/js/script.js"></script>
+</body>
+</html>

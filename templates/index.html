@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Health Mate - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <!-- <nav class="navbar">
+    <a href="index.html" class="logo">AI Health Mate</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="disease.html">Disease Predictor</a></li>
+      <li><a>Report Analyzer</a></li>
+      <li><a href="medicines.html">Medicines</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav> -->
+  {% include "navbar.html" %}
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Your AI Health Companion</h1>
+      <p>Check your health risks, get instant analysis, and make informed decisions — all powered by AI.</p>
+      <a href="/disease" class="btn btn-primary">Start Diagnosis</a>
+      <a href="/about" class="btn btn-secondary">Learn More</a>
+    </div>
+    <img src="{{ url_for('static', filename='images/image.png') }}" alt="Doctor Image">
+  </section>
+
+  <!-- ===== Features Section ===== -->
+  <section class="features">
+    <div class="feature-card">
+      <h3>Primary Care</h3>
+      <p>Comprehensive health check tools to monitor your vital organs and stay informed.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Emergency Cases</h3>
+      <p>Identify urgent symptoms and get recommendations to seek immediate medical attention.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Online Appointment</h3>
+      <p>Book consultations with certified doctors from the comfort of your home.</p>
+    </div>
+  </section>
+
+</body>
+</html>

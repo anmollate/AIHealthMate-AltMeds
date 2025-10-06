@@ -1,0 +1,86 @@
+:root {
+  --card-bg: #ffffff;
+  --muted: #666;
+  --accent: #0b73ff;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 30px 16px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+h1 {
+  text-align: center;
+  margin: 0 0 16px 0;
+  font-size: 22px;
+}
+
+.upload-label {
+  display:block;
+  margin-bottom:8px;
+  font-weight:600;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px dashed var(--accent);
+  border-radius: 8px;
+  background: #eef6ff;
+}
+
+.preview img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+#controls {
+  margin-top: 12px;
+}
+
+#sendBtn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.vital-card {
+  background: #fbfdff;
+  border-left: 5px solid var(--accent);
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+}
+
+.vital-title {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.rawtext {
+  max-height: 240px;
+  overflow: auto;
+  background: #f7f9fc;
+  padding: 12px;
+  border-radius: 8px;
+}

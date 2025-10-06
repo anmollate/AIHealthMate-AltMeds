@@ -1,0 +1,13 @@
+/* This file is loaded after style.css — it can override styles (cascading) */
+:root {
+  --accent: #198754; /* override accent color to green */
+}
+
+.vital-card {
+  border-left-width: 6px;
+}
+
+#sendBtn {
+  background: var(--accent);
+  box-shadow: 0 6px 18px rgba(25, 135, 84, 0.12);
+}

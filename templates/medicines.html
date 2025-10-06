@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicines - AI Health Mate</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    .medicine-container {
+      padding: 40px 5%;
+    }
+    .search-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .search-filter input, .search-filter select {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 250px;
+    }
+    .medicine-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .medicine-card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      flex: 1 1 calc(25% - 20px);
+      min-width: 200px;
+    }
+    .medicine-card h3 {
+      color: #0077b6;
+      margin-bottom: 5px;
+    }
+    .medicine-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .medicine-card strong {
+      display: block;
+      margin-top: 5px;
+      color: #023e8a;
+    }
+    @media (max-width: 768px) {
+      .medicine-card {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <!-- <nav class="navbar">
+    <a href="index.html" class="logo">AI Health Mate</a>
+    <ul>
+      <li><a href="/index">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/disease">Disease Predictor</a></li>
+      <li><a>Report Analyzer</a></li>
+      <li><a href="/medicines" class="active">Medicines</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav> -->
+  {% include "navbar.html" %}
+
+  <!-- Medicines Section -->
+  <div class="medicine-container">
+    <h1>Online Medicines</h1>
+    <p>Search and browse common medicines with basic details.</p>
+
+    <!-- Search and Filter -->
+    <div class="search-filter">
+      <input type="text" id="searchInput" placeholder="Search medicine..." oninput="filterMedicines()">
+      <select id="categoryFilter" onchange="filterMedicines()">
+        <option value="">All Categories</option>
+        <option value="Pain Relief">Pain Relief</option>
+        <option value="Antibiotics">Antibiotics</option>
+        <option value="Diabetes Care">Diabetes Care</option>
+        <option value="Heart Care">Heart Care</option>
+      </select>
+    </div>
+
+    <!-- Medicine List -->
+    <div class="medicine-list" id="medicineList">
+      <!-- Medicines will be injected here -->
+    </div>
+  </div>
+
+  <script>
+    const medicines = [
+      { name: "Paracetamol", category: "Pain Relief", use: "Reduces fever and relieves mild pain.", price: "₹20" },
+      { name: "Ibuprofen", category: "Pain Relief", use: "Relieves inflammation, pain, and fever.", price: "₹50" },
+      { name: "Amoxicillin", category: "Antibiotics", use: "Treats bacterial infections.", price: "₹120" },
+      { name: "Metformin", category: "Diabetes Care", use: "Controls blood sugar levels in type 2 diabetes.", price: "₹80" },
+      { name: "Aspirin", category: "Heart Care", use: "Prevents blood clots and reduces heart attack risk.", price: "₹40" },
+      { name: "Azithromycin", category: "Antibiotics", use: "Treats respiratory and skin infections.", price: "₹150" }
+    ];
+
+    function displayMedicines(list) {
+      const container = document.getElementById('medicineList');
+      container.innerHTML = "";
+      if (list.length === 0) {
+        container.innerHTML = "<p>No medicines found.</p>";
+        return;
+      }
+      list.forEach(med => {
+        const card = document.createElement('div');
+        card.className = "medicine-card";
+        card.innerHTML = `
+          <h3>${med.name}</h3>
+          <p>${med.use}</p>
+          <strong>Price: ${med.price}</strong>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterMedicines() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+      const filtered = medicines.filter(med =>
+        med.name.toLowerCase().includes(search) &&
+        (category === "" || med.category === category)
+      );
+      displayMedicines(filtered);
+    }
+
+    // Initial display
+    displayMedicines(medicines);
+  </script>
+
+</body>
+</html>

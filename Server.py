@@ -1,8 +1,13 @@
 import pandas as pd
 import joblib
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import numpy as np
+import re
+from PIL import Image
+import pytesseract
+import cv2
+import io
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +18,73 @@ Anemiamodel= joblib.load("Models/Anemia_Model.pkl")
 KidneyDiseaseModel=joblib.load("Models/KidneyDisease_Model.pkl")
 LiverDiseaseModel=joblib.load("Models/Liver_Disease_Model.pkl")
 HeartDiseaseModel=joblib.load("Models/HeartDisease_Model.pkl")
+
+pattern = r"([A-Za-z ()]+)[^\d]*([\d]+\.?\d*)[^\d]+([\d]+\.?\d*)-([\d]+\.?\d*)"
+
+def extract_vitals_from_image_bytes(image_bytes):
+    # Open image from bytes, convert to grayscale using OpenCV for better OCR
+    image_stream = io.BytesIO(image_bytes)
+    pil_img = Image.open(image_stream).convert("RGB")
+    cv_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
+    gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
+
+    # Optional preprocessing for better OCR:
+    # gray = cv2.medianBlur(gray, 3)
+    # _, gray = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU + cv2.THRESH_BINARY)
+
+    pil_for_ocr = Image.fromarray(gray)
+
+    # Run pytesseract
+    text = pytesseract.image_to_string(pil_for_ocr, config='--psm 6')
+
+    vitals_found = {}
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        match = re.search(pattern, line)
+        if match:
+            vital_name = match.group(1).strip()
+            try:
+                value = float(match.group(2))
+                lower = float(match.group(3))
+                upper = float(match.group(4))
+            except ValueError:
+                continue
+
+            vitals_found[vital_name] = {
+                "value": value,
+                "lower": lower,
+                "upper": upper,
+                "raw_line": line
+            }
+
+    return vitals_found, text
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/medicines')
+def medicines():
+    return render_template('medicines.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/disease')
+def disease():
+    return render_template('disease.html')
+
+@app.route('/ReportAnalyzer')
+def Report():
+    return render_template('ReportAnalyzer.html')
+
 
 @app.route("/DiabetesPredict", methods=["POST"])
 def predict_diabetes():
@@ -105,7 +177,23 @@ def predict_HeartDisease():
 
     return str(prediction)
 
+@app.route("/api/ocr", methods=["POST"])
+def ocr():
+    if "image" not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files["image"]
+    if file.filename == "":
+        return jsonify({"error": "No selected file"}), 400
+
+    try:
+        image_bytes = file.read()
+        vitals, raw_text = extract_vitals_from_image_bytes(image_bytes)
+        return jsonify({"vitals": vitals, "raw_text": raw_text})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host="0.0.0.0", port=5000)

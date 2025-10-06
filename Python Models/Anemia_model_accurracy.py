@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import time
 
 start_time=time.time()
-df=pd.read_csv("anemia_diagnosis_5000.csv")
+df=pd.read_csv("Datasets/anemia_diagnosis_5000.csv")
 
 x=df[["Hemoglobin (g/dL)","Hematocrit (%)","MCV (fL)","MCH (pg)","RDW (%)"]]
 y=df["Diagnosis"]

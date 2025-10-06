@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - AI Health Mate</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <!-- <nav class="navbar">
+    <a href="index.html" class="logo">AI Health Mate</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="disease.html">Disease Predictor</a></li>
+      <li><a>Report Analyzer</a></li>
+      <li><a href="medicines.html">Medicines</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav> -->
+  {% include "navbar.html" %}
+
+  <!-- Contact Form -->
+  <section style="padding: 40px 5%;">
+    <h1>Contact Us</h1>
+    <p style="margin-top: 15px;">Have questions or feedback? Get in touch with us.</p>
+
+    <form style="margin-top: 20px; max-width: 500px;">
+      <label>Name:</label>
+      <input type="text" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+
+      <label>Email:</label>
+      <input type="email" style="width: 100%; padding: 10px; margin-bottom: 10px;" required>
+
+      <label>Message:</label>
+      <textarea style="width: 100%; padding: 10px; height: 100px; margin-bottom: 10px;" required></textarea>
+
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </section>
+
+</body>
+</html>
