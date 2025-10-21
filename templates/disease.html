@@ -462,7 +462,7 @@ function checkLiver() {
     return;
   }
 
-  fetch("http://localhost:5000/LiverDiseasePredict", {
+  fetch("https://aihealthmate-altmeds.onrender.com/LiverDiseasePredict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
@@ -562,7 +562,7 @@ function checkKidney() {
   }
 
   // Send data to Flask API
-  fetch("http://localhost:5000/KidneyDiseasePredict", {
+  fetch("https://aihealthmate-altmeds.onrender.com/KidneyDiseasePredict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
@@ -675,7 +675,7 @@ function checkDiabetes() {
   }
 
   // Send data to Flask API
-  fetch("http://localhost:5000/DiabetesPredict", {
+  fetch("https://aihealthmate-altmeds.onrender.com/DiabetesPredict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
@@ -772,7 +772,7 @@ function checkAnemia() {
   }
 
   // Send data to Flask API
-  fetch("http://localhost:5000/AnemiaPredict", {
+  fetch("https://aihealthmate-altmeds.onrender.com/AnemiaPredict", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
