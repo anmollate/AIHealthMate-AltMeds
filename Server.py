@@ -21,7 +21,7 @@ MODELS_DIR = os.path.join(BASE_DIR, "Models")
 Diabetesmodel = joblib.load(os.path.join(MODELS_DIR, "ImprovedDiabetesModel.pkl"))
 Anemiamodel = joblib.load(os.path.join(MODELS_DIR, "Anemia_Model.pkl"))
 KidneyDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "KidneyDisease_Model.pkl"))
-LiverDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "Liver_Disease_Model.pkl"))
+LiverDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "Liver_Disease_Modelnew.pkl"))
 HeartDiseaseModel = joblib.load(os.path.join(MODELS_DIR, "HeartDisease_Model.pkl"))
 
 pattern = r"([A-Za-z ()]+)[^\d]*([\d]+\.?\d*)[^\d]+([\d]+\.?\d*)-([\d]+\.?\d*)"

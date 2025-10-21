@@ -5,7 +5,7 @@ import pandas as pd
 import joblib
 import time
 
-df=pd.read_csv("kidney_disease_balanced_6000.csv")
+df=pd.read_csv("Datasets/kidney_disease_balanced_6000.csv")
 start_time=time.time()
 x=df[["Creatinine (mg/dL)","BUN (mg/dL)","eGFR","Potassium (mmol/L)","Bicarbonate (mmol/L)"]]
 y=df["Kidney_Stage"]
@@ -21,4 +21,4 @@ accuracy=accuracy_score(y_test,y_pred)
 print(accuracy*100)
 print("Time Required: ",end_time-start_time,"Seconds")
 
-joblib.dump(model,"KidneyDisease_Model.pkl")
+# joblib.dump(model,"KidneyDisease_Model.pkl")

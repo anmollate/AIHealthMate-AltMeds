@@ -6,7 +6,7 @@ import joblib
 import time
 
 start_time=time.time()
-df=pd.read_excel("doubled_dataset.xlsx")
+df=pd.read_excel("Datasets/doubled_dataset.xlsx")
 
 x=df[["Glucose","Blood pressure","Skin thickness","Insulin","Body mass index","Diabetes pedigree function","Age"]]
 y=df["Outcome"]

@@ -34,6 +34,7 @@ if image is not None:
             }
 
     # print(vitals_found)
+    summary_analysis = []
 
     for vital,data in vitals_found.items():
         value=data['value']
@@ -57,11 +58,26 @@ if image is not None:
         st.pyplot(fig)
         st.write(f"{vital} Analysis:")
         if value < lower:
-            st.write(f"⚠️ {vital} is **below the normal range** ({lower}-{upper})")
+            analysis=st.write(f"⚠️ {vital} is **below the normal range** ({lower}-{upper})")
         elif value > upper:
-            st.write(f"⚠️ {vital} is **above the normal range** ({lower}-{upper})")
+            analysis=st.write(f"⚠️ {vital} is **above the normal range** ({lower}-{upper})")
         else:
-            st.write(f"✅ {vital} is **within the normal range** ({lower}-{upper})")
+            analysis=st.write(f"✅ {vital} is **within the normal range** ({lower}-{upper})")
+
+        
+    #     st.write(f"{vital} Analysis:")
+    #     st.write(analysis)
+
+    #     # Add to summary
+    #     # summary_analysis.append(f"{vital}: {analysis}")
+    #     if "below" in analysis.lower() or "above" in analysis.lower():
+    #         summary_analysis.append(f"{vital}: {analysis}")
+
+    # # Display summary at the end
+    # if summary_analysis:
+    #     st.subheader("📋 Summary of All Vitals")
+    #     for item in summary_analysis:
+    #         st.write(item)
 
 
 

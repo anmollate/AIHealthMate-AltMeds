@@ -51,27 +51,27 @@
   <p class="desc">Enter your health values to check risk levels (educational use only).</p>
 
   <div class="tabs">
-    <button class="tab-btn active" data-tab="heart"><i class="fa-solid fa-heart"></i> Heart</button>
+    <!-- <button class="tab-btn active" data-tab="heart"><i class="fa-solid fa-heart"></i> Heart</button> -->
     <button class="tab-btn" data-tab="liver"><i class="fa-solid fa-flask"></i> Liver</button>
     <button class="tab-btn" data-tab="kidney"><i class="fa-solid fa-droplet"></i> Kidney</button>
-    <button class="tab-btn" data-tab="lungs"><i class="fa-solid fa-lungs"></i> Lungs</button>
+    <!-- <button class="tab-btn" data-tab="lungs"><i class="fa-solid fa-lungs"></i> Lungs</button> -->
     <button class="tab-btn" data-tab="diabetes"><i class="fa-solid fa-syringe"></i> Diabetes</button>
     <button class="tab-btn" data-tab="typhoid"><i class="fa-solid fa-bug"></i> Typhoid</button>
-    <button class="tab-btn" data-tab="malaria"><i class="fa-solid fa-mosquito"></i> Malaria</button>
-    <button class="tab-btn" data-tab="dengue"><i class="fa-solid fa-virus"></i> Dengue</button>
+    <!-- <button class="tab-btn" data-tab="malaria"><i class="fa-solid fa-mosquito"></i> Malaria</button>
+    <button class="tab-btn" data-tab="dengue"><i class="fa-solid fa-virus"></i> Dengue</button> -->
     <button class="tab-btn" data-tab="anemia"><i class="fa-solid fa-virus"></i> Anemia</button>
     <button class="tab-btn" data-tab="bmi"><i class="fa-solid fa-weight-scale"></i> BMI</button>
   </div>
 
   <!-- Heart -->
-  <div id="heart" class="panel active">
+  <!-- <div id="heart" class="panel active">
     <div class="field"><label>Total Cholesterol</label><input id="h_tc" type="number"></div>
     <div class="field"><label>LDL</label><input id="h_ldl" type="number"></div>
     <div class="field"><label>HDL</label><input id="h_hdl" type="number"></div>
     <div class="field"><label>Systolic BP</label><input id="h_sbp" type="number"></div>
     <button class="btn" onclick="checkHeart()">Check</button>
     <div id="h_res" class="result"></div>
-  </div>
+  </div> -->
 
   <!-- Liver -->
   <!-- <div id="liver" class="panel">
@@ -81,17 +81,53 @@
     <button class="btn" onclick="checkLiver()">Check</button>
     <div id="l_res" class="result"></div>
   </div> -->
-      <div id="liver" class="panel">
+      <div id="liver" class="panel active">
         <h3>Liver Health</h3>
-        <div class="field"><label>Age</label><input id="Age" type="number"/></div>
-        <div class="field"><label>Total Bilirubin</label><input id="TB" type="number"/></div>
-        <div class="field"><label>Direct Bilirubin</label><input id="DB" type="number"/></div>
-        <div class="field"><label>Alkaline Phosphatase</label><input id="AP" type="number"/></div>
-        <div class="field"><label>Alanine Aminotransferase</label><input id="ALA" type="number"/></div>
-        <div class="field"><label>Aspartate Aminotransferase</label><input id="ASA" type="number"/></div>
-        <div class="field"><label>Total Proteins</label><input id="TP" type="number"/></div>
-        <div class="field"><label>Albumin</label><input id="ALB" type="number"/></div>
-        <div class="field"><label>Albumin And Globulin Ratio</label><input id="AGR" type="number"/></div>
+          <div class="field">
+            <label>Age</label>
+            <input id="Age" type="number" min="1" max="120" step="1"/>
+          </div>
+
+          <div class="field">
+            <label>Total Bilirubin (mg/dL)</label>
+            <input id="TB" type="number" min="0" max="30" step="0.1"/>
+          </div>
+
+          <div class="field">
+            <label>Direct Bilirubin (mg/dL)</label>
+            <input id="DB" type="number" min="0" max="20" step="0.1"/>
+          </div>
+
+          <div class="field">
+            <label>Alkaline Phosphatase (IU/L)</label>
+            <input id="AP" type="number" min="20" max="1000" step="1"/>
+          </div>
+
+          <div class="field">
+            <label>Alanine Aminotransferase (ALT) (IU/L)</label>
+            <input id="ALA" type="number" min="5" max="2000" step="1"/>
+          </div>
+
+          <div class="field">
+            <label>Aspartate Aminotransferase (AST) (IU/L)</label>
+            <input id="ASA" type="number" min="5" max="2000" step="1"/>
+          </div>
+
+          <div class="field">
+            <label>Total Proteins (g/dL)</label>
+            <input id="TP" type="number" min="3" max="12" step="0.1"/>
+          </div>
+
+          <div class="field">
+            <label>Albumin (g/dL)</label>
+            <input id="ALB" type="number" min="1" max="6" step="0.1"/>
+          </div>
+
+          <div class="field">
+            <label>Albumin And Globulin Ratio</label>
+            <input id="AGR" type="number" min="0.5" max="3" step="0.1"/>
+          </div>
+
         <div class="action-row">
           <button class="btn" onclick="checkLiver()">Check</button>
           <div id="l_res" class="result"></div>
@@ -106,7 +142,7 @@
     <div id="k_res" class="result"></div>
   </div> -->
 
-        <div id="kidney" class="panel">
+        <!-- <div id="kidney" class="panel">
         <h3>Kidney Health</h3>
         <div class="field"><label>Creatinine</label><input id="CREAT" type="number"/></div>
         <div class="field"><label>BUN/Urea</label><input id="BUN" type="number"/></div>
@@ -117,7 +153,41 @@
           <button class="btn" onclick="checkKidney()">Check</button>
           <div id="k_res" class="result"></div>
         </div>
-      </div>
+      </div> -->
+      <div id="kidney" class="panel">
+  <h3>Kidney Health</h3>
+
+  <div class="field">
+    <label>Creatinine (mg/dL)</label>
+    <input id="CREAT" type="number" min="0.2" max="15" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>BUN / Urea (mg/dL)</label>
+    <input id="BUN" type="number" min="1" max="200" step="1" />
+  </div>
+
+  <div class="field">
+    <label>eGFR (mL/min/1.73m²)</label>
+    <input id="EGFR" type="number" min="1" max="150" step="1" />
+  </div>
+
+  <div class="field">
+    <label>Potassium (mmol/L)</label>
+    <input id="POTA" type="number" min="2.5" max="7.5" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>Bicarbonate (mmol/L)</label>
+    <input id="BICAR" type="number" min="10" max="40" step="0.1" />
+  </div>
+
+  <div class="action-row">
+    <button class="btn" onclick="checkKidney()">Check</button>
+    <div id="k_res" class="result"></div>
+  </div>
+</div>
+
 
   <!-- Lungs -->
   <div id="lungs" class="panel">
@@ -134,7 +204,7 @@
     <button class="btn" onclick="checkDiabetes()">Check</button>
     <div id="d_res" class="result"></div>
   </div> -->
-        <div id="diabetes" class="panel">
+        <!-- <div id="diabetes" class="panel">
         <h3>Diabetes Risk</h3>
         <div class="field"><label>Glucose</label><input id="GLUC" type="number"/></div>
         <div class="field"><label>Blood Pressure</label><input id="BP" type="number"/></div>
@@ -147,7 +217,51 @@
           <button class="btn" onclick="checkDiabetes()">Check</button>
           <div id="d_res" class="result"></div>
         </div>
-      </div>
+      </div> -->
+      <div id="diabetes" class="panel">
+  <h3>Diabetes Risk</h3>
+
+  <div class="field">
+    <label>Glucose (mg/dL)</label>
+    <input id="GLUC" type="number" min="20" max="600" step="1" />
+  </div>
+
+  <div class="field">
+    <label>Blood Pressure (mmHg)</label>
+    <input id="BP" type="number" min="50" max="250" step="1" />
+  </div>
+
+  <div class="field">
+    <label>Skin Thickness (mm)</label>
+    <input id="ST" type="number" min="5" max="100" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>Insulin (µIU/mL)</label>
+    <input id="INS" type="number" min="0" max="1000" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>Body Mass Index (BMI)</label>
+    <input id="BMI" type="number" min="10" max="70" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>Diabetes Pedigree Function (DPF)</label>
+    <input id="DPF" type="number" min="0" max="3" step="0.001" />
+  </div>
+
+  <div class="field">
+    <label>Age (years)</label>
+    <input id="AGE" type="number" min="1" max="120" step="1" />
+  </div>
+
+  <div class="action-row">
+    <button class="btn" onclick="checkDiabetes()">Check</button>
+    <div id="d_res" class="result"></div>
+  </div>
+</div>
+
 
 
   <!-- Typhoid -->
@@ -158,21 +272,21 @@
   </div>
 
   <!-- Malaria -->
-  <div id="malaria" class="panel">
+  <!-- <div id="malaria" class="panel">
     <div class="field"><label>Parasite Count</label><input id="m_para" type="number"></div>
     <button class="btn" onclick="checkMalaria()">Check</button>
     <div id="m_res" class="result"></div>
-  </div>
+  </div> -->
 
   <!-- Dengue -->
-  <div id="dengue" class="panel">
+  <!-- <div id="dengue" class="panel">
     <div class="field"><label>Platelet Count</label><input id="de_plate" type="number"></div>
     <button class="btn" onclick="checkDengue()">Check</button>
     <div id="de_res" class="result"></div>
-  </div>
+  </div> -->
 
   <!--Anemia-->
-        <div id="anemia" class="panel">
+        <!-- <div id="anemia" class="panel">
         <h3>Anemia Risk</h3>
         <div class="field"><label>Hemoglobin(g/dL)</label><input id="HEM" type="number"/></div>
         <div class="field"><label>Hematocrit (%)</label><input id="HEMA" type="number"/></div>
@@ -183,7 +297,41 @@
           <button class="btn" onclick="checkAnemia()">Check</button>
           <div id="An_res" class="result"></div>
         </div>
-      </div>
+      </div> -->
+      <div id="anemia" class="panel">
+  <h3>Anemia Risk</h3>
+
+  <div class="field">
+    <label>Hemoglobin (g/dL)</label>
+    <input id="HEM" type="number" min="3" max="22" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>Hematocrit (%)</label>
+    <input id="HEMA" type="number" min="10" max="65" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>MCV (fL)</label>
+    <input id="MCV" type="number" min="50" max="130" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>MCH (pg)</label>
+    <input id="MCH" type="number" min="10" max="40" step="0.1" />
+  </div>
+
+  <div class="field">
+    <label>RDW (%)</label>
+    <input id="RDW" type="number" min="11" max="30" step="0.1" />
+  </div>
+
+  <div class="action-row">
+    <button class="btn" onclick="checkAnemia()">Check</button>
+    <div id="An_res" class="result"></div>
+  </div>
+</div>
+
 
   <!-- BMI -->
   <div id="bmi" class="panel">
@@ -228,81 +376,211 @@ function setResult(id,level,msg){
 // function checkLiver(){let bil=+l_bil.value,alt=+l_alt.value,ast=+l_ast.value,score=0;
 //   if(bil>1.2) score++; if(alt>40) score++; if(ast>40) score++;
 //   setResult('l_res',score>=2?'crit':score>=1?'warn':'ok',score>=2?'High Liver Risk':score>=1?'Moderate Liver Risk':'Low Liver Risk');}
-function checkLiver(){
-  let Age=document.getElementById("Age").value;
-  let Total_Bilirubin=document.getElementById("TB").value;
-  let Direct_Bilirubin=document.getElementById("DB").value;
-  let Alkaline_Phosphatase=document.getElementById("AP").value;
-  let Alanine_Aminotransferase=document.getElementById("ALA").value;
-  let Aspartate_Aminotransferase=document.getElementById("ASA").value;
-  let Total_Proteins=document.getElementById("TP").value;
-  let Albumin=document.getElementById("ALB").value;
-  let Albumin_And_Globulin_Ratio=document.getElementById("AGR").value;
-  if([Age,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphatase,Alanine_Aminotransferase,Aspartate_Aminotransferase,Total_Proteins,Albumin,Albumin_And_Globulin_Ratio].some(isNaN)) return setResult('l_res','warn','Fill All The Values!')
+// function checkLiver(){
+//   let Age=document.getElementById("Age").value;
+//   let Total_Bilirubin=document.getElementById("TB").value;
+//   let Direct_Bilirubin=document.getElementById("DB").value;
+//   let Alkaline_Phosphatase=document.getElementById("AP").value;
+//   let Alanine_Aminotransferase=document.getElementById("ALA").value;
+//   let Aspartate_Aminotransferase=document.getElementById("ASA").value;
+//   let Total_Proteins=document.getElementById("TP").value;
+//   let Albumin=document.getElementById("ALB").value;
+//   let Albumin_And_Globulin_Ratio=document.getElementById("AGR").value;
+//   if([Age,Total_Bilirubin,Direct_Bilirubin,Alkaline_Phosphatase,Alanine_Aminotransferase,Aspartate_Aminotransferase,Total_Proteins,Albumin,Albumin_And_Globulin_Ratio].some(isNaN)) return setResult('l_res','warn','Fill All The Values!')
 
-  let data={
-    Age:Age,
-    Total_Bilirubin:Total_Bilirubin,
-    Direct_Bilirubin:Direct_Bilirubin,
-    Alkaline_Phosphatase:Alkaline_Phosphatase,
-    Alanine_Aminotransferase:Alanine_Aminotransferase,
-    Aspartate_Aminotransferase:Aspartate_Aminotransferase,
-    Total_Proteins:Total_Proteins,
-    Albumin:Albumin,
-    Albumin_And_Globulin_Ratio:Albumin_And_Globulin_Ratio
-  };
+//   let data={
+//     Age:Age,
+//     Total_Bilirubin:Total_Bilirubin,
+//     Direct_Bilirubin:Direct_Bilirubin,
+//     Alkaline_Phosphatase:Alkaline_Phosphatase,
+//     Alanine_Aminotransferase:Alanine_Aminotransferase,
+//     Aspartate_Aminotransferase:Aspartate_Aminotransferase,
+//     Total_Proteins:Total_Proteins,
+//     Albumin:Albumin,
+//     Albumin_And_Globulin_Ratio:Albumin_And_Globulin_Ratio
+//   };
 
-  fetch("https://aihealthmate-altmeds.onrender.com/LiverDiseasePredict", {
+//   fetch("http://localhost:5000/LiverDiseasePredict", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(data)
+//   })
+//   .then(res => res.text())
+//   .then(response => {
+//     console.log("Response from Flask:", response);
+//     if(response=="1") setResult('l_res','crit','🚨 Liver Health: Poor!\n👨‍⚕️ Consult A Hepatologist Immediately! 🩺🩹')
+//     else setResult('l_res','ok','Liver Health: Good!')
+//   })
+//   .catch(error => console.error("Error:", error));
+// }
+function checkLiver() {
+  const fields = [
+    { id: "Age", name: "Age", key: "Age" },
+    { id: "TB", name: "Total Bilirubin", key: "Total_Bilirubin" },
+    { id: "DB", name: "Direct Bilirubin", key: "Direct_Bilirubin" },
+    { id: "AP", name: "Alkaline Phosphatase", key: "Alkaline_Phosphatase" },
+    { id: "ALA", name: "Alanine Aminotransferase (ALT)", key: "Alanine_Aminotransferase" },
+    { id: "ASA", name: "Aspartate Aminotransferase (AST)", key: "Aspartate_Aminotransferase" },
+    { id: "TP", name: "Total Proteins", key: "Total_Proteins" },
+    { id: "ALB", name: "Albumin", key: "Albumin" },
+    { id: "AGR", name: "Albumin and Globulin Ratio", key: "Albumin_And_Globulin_Ratio" }
+  ];
+
+  let data = {};
+  let isValid = true;
+  let invalidMessages = [];
+
+  fields.forEach(f => document.getElementById(f.id).style.border = "");
+
+  for (let f of fields) {
+    const input = document.getElementById(f.id);
+    const value = parseFloat(input.value);
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+
+    if (isNaN(value)) {
+      invalidMessages.push(`${f.name} is required.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+    if (value < min || value > max) {
+      invalidMessages.push(`${f.name} must be between ${min} and ${max}.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    // Use backend key instead of auto-generated one
+    data[f.key] = value;
+  }
+
+  if (!isValid) {
+    setResult('l_res', 'warn', invalidMessages.join('<br>'));
+    return;
+  }
+
+  fetch("http://localhost:5000/LiverDiseasePredict", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(res => res.text())
-  .then(response => {
-    console.log("Response from Flask:", response);
-    if(response=="1") setResult('l_res','crit','🚨 Liver Health: Poor!')
-    else setResult('l_res','ok','Liver Health: Good!')
-  })
-  .catch(error => console.error("Error:", error));
+    .then(res => res.text())
+    .then(response => {
+      console.log("Response from Flask:", response);
+      if (response == "0")
+        setResult('l_res', 'crit', '🚨 Liver Health: Poor!<br>👨‍⚕️ Consult A Hepatologist Immediately! 🩺🩹');
+      else
+        setResult('l_res', 'ok', '✅ Liver Health: Good!');
+    })
+    .catch(error => console.error("Error:", error));
 }
+
+
 
 
 // function checkKidney(){let cre=+k_cre.value,urea=+k_urea.value,score=0;
 //   if(cre>1.3) score++; if(urea>40) score++;
 //   setResult('k_res',score>=2?'crit':score>=1?'warn':'ok',score>=2?'High Kidney Risk':score>=1?'Moderate Kidney Risk':'Low Kidney Risk');}
-function checkKidney(){
-  let Creatinine=document.getElementById("CREAT").value;
-  let BUN=document.getElementById("BUN").value;
-  let eGFR=document.getElementById("EGFR").value;
-  let Potassium=document.getElementById("POTA").value;
-  let Bicarbonate=document.getElementById("BICAR").value;
+// function checkKidney(){
+//   let Creatinine=document.getElementById("CREAT").value;
+//   let BUN=document.getElementById("BUN").value;
+//   let eGFR=document.getElementById("EGFR").value;
+//   let Potassium=document.getElementById("POTA").value;
+//   let Bicarbonate=document.getElementById("BICAR").value;
 
-  let data={
-    Creatinine: Creatinine,
-    BUN: BUN,
-    eGFR: eGFR,
-    Potassium: Potassium,
-    Bicarbonate: Bicarbonate
-  };
+//   let data={
+//     Creatinine: Creatinine,
+//     BUN: BUN,
+//     eGFR: eGFR,
+//     Potassium: Potassium,
+//     Bicarbonate: Bicarbonate
+//   };
 
-      fetch("https://aihealthmate-altmeds.onrender.com/KidneyDiseasePredict", {
+//       fetch("http://localhost:5000/KidneyDiseasePredict", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(data)
+//   })
+//   .then(res => res.text())
+//   .then(response => {
+//     console.log("Response from Flask:", response);
+//     if (response=== "Severe Kidney Damage") setResult('k_res','crit','🚨 Severe Kidney Damage!\n👨‍⚕️ Consult A Nephrologist Immediately! 🩺🩹');
+//     else if (response=== "Moderate Kidney Damage") setResult('k_res','warn','🚨 Moderate Kidney Damage!');
+//     else if (response==="Normal or Mild Kidney Damage")setResult('k_res','ok','✅Normal or Mild Kidney Damage')
+//   })
+//   .catch(error => console.error("Error:", error));
+// }
+function checkKidney() {
+  const fields = [
+    { id: "CREAT", name: "Creatinine", key: "Creatinine" },
+    { id: "BUN", name: "BUN / Urea", key: "BUN" },
+    { id: "EGFR", name: "eGFR", key: "eGFR" },
+    { id: "POTA", name: "Potassium", key: "Potassium" },
+    { id: "BICAR", name: "Bicarbonate", key: "Bicarbonate" }
+  ];
+
+  let data = {};
+  let isValid = true;
+  let invalidMessages = [];
+
+  // Reset all input borders
+  fields.forEach(f => document.getElementById(f.id).style.border = "");
+
+  // Validate inputs
+  for (let f of fields) {
+    const input = document.getElementById(f.id);
+    const value = parseFloat(input.value);
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+
+    if (isNaN(value)) {
+      invalidMessages.push(`${f.name} is required.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    if (value < min || value > max) {
+      invalidMessages.push(`${f.name} must be between ${min} and ${max}.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    // Use the key property to match Flask
+    data[f.key] = value;
+  }
+
+  if (!isValid) {
+    setResult('k_res', 'warn', invalidMessages.join('<br>'));
+    return;
+  }
+
+  // Send data to Flask API
+  fetch("http://localhost:5000/KidneyDiseasePredict", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(res => res.text())
-  .then(response => {
-    console.log("Response from Flask:", response);
-    if (response=== "Severe Kidney Damage") setResult('k_res','crit','🚨 Severe Kidney Damage!');
-    else if (response=== "Moderate Kidney Damage") setResult('k_res','warn','🚨 Moderate Kidney Damage!');
-    else if (response==="Normal or Mild Kidney Damage")setResult('k_res','ok','✅Normal or Mild Kidney Damage')
-  })
-  .catch(error => console.error("Error:", error));
+    .then(res => res.text())
+    .then(response => {
+      console.log("Response from Flask:", response);
+      if (response === "Kidney Failure")
+        setResult('k_res', 'crit', '🚨 Severe Kidney Damage!<br>👨‍⚕️ Consult A Nephrologist Immediately! 🩺🩹');
+      else if (response === "Moderate Kidney Damage")
+        setResult('k_res', 'warn', '🚨 Moderate Kidney Damage!');
+      else if (response === "Normal or Mild Kidney Damage")
+        setResult('k_res', 'ok', '✅ Normal or Mild Kidney Damage');
+    })
+    .catch(error => console.error("Error:", error));
 }
+
+
 
 
 // function checkLungs(){let fev=+lu_fev.value,o2=+lu_o2.value,score=0;
@@ -315,76 +593,242 @@ function checkKidney(){
 // function checkDiabetes(){let fgl=+d_fgl.value,hba=+d_hba.value,score=0;
 //   if(fgl>126) score++; if(hba>6.5) score++;
 //   setResult('d_res',score>=2?'crit':score>=1?'warn':'ok',score>=2?'High Diabetes Risk':score>=1?'Moderate Diabetes Risk':'Low Diabetes Risk');}
-function checkDiabetes(){
-  let Glucose=document.getElementById("GLUC").value;
-  let BP=document.getElementById("BP").value;
-  let ST=document.getElementById("ST").value;
-  let INS=document.getElementById("INS").value;
-  let BMI=document.getElementById("BMI").value;
-  let DPF=document.getElementById("DPF").value;
-  let Age=document.getElementById("AGE").value;
+// function checkDiabetes(){
+//   let Glucose=document.getElementById("GLUC").value;
+//   let BP=document.getElementById("BP").value;
+//   let ST=document.getElementById("ST").value;
+//   let INS=document.getElementById("INS").value;
+//   let BMI=document.getElementById("BMI").value;
+//   let DPF=document.getElementById("DPF").value;
+//   let Age=document.getElementById("AGE").value;
 
-  let data={
-    Glucose: Glucose,
-    BP: BP,
-    ST: ST,
-    INS: INS,
-    BMI: BMI,
-    DPF: DPF,
-    Age: Age
-  };
+//   let data={
+//     Glucose: Glucose,
+//     BP: BP,
+//     ST: ST,
+//     INS: INS,
+//     BMI: BMI,
+//     DPF: DPF,
+//     Age: Age
+//   };
 
-  fetch("https://aihealthmate-altmeds.onrender.com/DiabetesPredict", {
+//   fetch("http://localhost:5000/DiabetesPredict", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(data)
+//   })
+//   .then(res => res.text())
+//   .then(response => {
+//     console.log("Response from Flask:", response);
+//     if (response=== "Positive") setResult('d_res','crit','🚨 High Risk Of Diabetes!\n👨‍⚕️ Consult A Endocrinologist Immediately! 🩺🩹');
+//     else setResult('d_res','ok','✅ No Diabetes Detected!')
+//   })
+//   .catch(error => console.error("Error:", error));
+// }
+function checkDiabetes() {
+  const fields = [
+    { id: "GLUC", name: "Glucose (mg/dL)", key: "Glucose" },
+    { id: "BP", name: "Blood Pressure (mmHg)", key: "BP" },
+    { id: "ST", name: "Skin Thickness (mm)", key: "ST" },
+    { id: "INS", name: "Insulin (µIU/mL)", key: "INS" },
+    { id: "BMI", name: "Body Mass Index (BMI)", key: "BMI" },
+    { id: "DPF", name: "Diabetes Pedigree Function (DPF)", key: "DPF" },
+    { id: "AGE", name: "Age (years)", key: "Age" }
+  ];
+
+  let data = {};
+  let isValid = true;
+  let invalidMessages = [];
+
+  // Reset input borders
+  fields.forEach(f => document.getElementById(f.id).style.border = "");
+
+  // Validate each input field
+  for (let f of fields) {
+    const input = document.getElementById(f.id);
+    const value = parseFloat(input.value);
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+
+    if (isNaN(value)) {
+      invalidMessages.push(`${f.name} is required.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    if (value < min || value > max) {
+      invalidMessages.push(`${f.name} must be between ${min} and ${max}.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    data[f.key] = value;
+  }
+
+  if (!isValid) {
+    setResult('d_res', 'warn', invalidMessages.join('<br>'));
+    return;
+  }
+
+  // Send data to Flask API
+  fetch("http://localhost:5000/DiabetesPredict", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(res => res.text())
-  .then(response => {
-    console.log("Response from Flask:", response);
-    if (response=== "Positive") setResult('d_res','crit','🚨 High Risk Of Diabetes!');
-    else setResult('d_res','ok','✅ No Diabetes Detected!')
-  })
-  .catch(error => console.error("Error:", error));
+    .then(res => res.text())
+    .then(response => {
+      console.log("Response from Flask:", response);
+      if (response === "Positive")
+        setResult('d_res', 'crit', '🚨 High Risk Of Diabetes!<br>👨‍⚕️ Consult An Endocrinologist Immediately! 🩺🩹');
+      else if (response === "Borderline")
+        setResult('d_res', 'warn', '⚠️ Borderline Risk Of Diabetes. Maintain A Healthy Lifestyle.');
+      else
+        setResult('d_res', 'ok', '✅ No Diabetes Detected!');
+    })
+    .catch(error => console.error("Error:", error));
 }
 
 
-function checkAnemia(){
-  let hemoglobin=document.getElementById("HEM").value;
-  let hematocrit=document.getElementById("HEMA").value;
-  let MCV=document.getElementById("MCV").value;
-  let MCH=document.getElementById("MCH").value;
-  let RDW=document.getElementById("RDW").value;
 
-  let data={
-    hemoglobin: hemoglobin,
-    hematocrit: hematocrit,
-    MCV: MCV,
-    MCH: MCH,
-    RDW: RDW
-  };
+// function checkAnemia(){
+//   let hemoglobin=document.getElementById("HEM").value;
+//   let hematocrit=document.getElementById("HEMA").value;
+//   let MCV=document.getElementById("MCV").value;
+//   let MCH=document.getElementById("MCH").value;
+//   let RDW=document.getElementById("RDW").value;
 
-    fetch("https://aihealthmate-altmeds.onrender.com/AnemiaPredict", {
+//   let data={
+//     hemoglobin: hemoglobin,
+//     hematocrit: hematocrit,
+//     MCV: MCV,
+//     MCH: MCH,
+//     RDW: RDW
+//   };
+
+//     fetch("http://localhost:5000/AnemiaPredict", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify(data)
+//   })
+//   .then(res => res.text())
+//   .then(response => {
+//     console.log("Response from Flask:", response);
+//     if (response=== "Normocytic Anemia") setResult('An_res','crit','🚨 Normocytic Anemia Detected!\n👨‍⚕️ Consult A Hematologist Immediately! 🩺🩹');
+//     else if (response=== "Microcytic Anemia") setResult('An_res','crit','🚨 Microcytic Anemia Detected!\n👨‍⚕️ Consult A Hematologist Immediately! 🩺🩹');
+//     else setResult('An_res','ok','✅ No Anemia Detected!')
+//   })
+//   .catch(error => console.error("Error:", error));
+// }
+function checkAnemia() {
+  const fields = [
+    { id: "HEM", name: "Hemoglobin (g/dL)", key: "hemoglobin" },
+    { id: "HEMA", name: "Hematocrit (%)", key: "hematocrit" },
+    { id: "MCV", name: "MCV (fL)", key: "MCV" },
+    { id: "MCH", name: "MCH (pg)", key: "MCH" },
+    { id: "RDW", name: "RDW (%)", key: "RDW" }
+  ];
+
+  let data = {};
+  let isValid = true;
+  let invalidMessages = [];
+
+  // Reset input borders
+  fields.forEach(f => document.getElementById(f.id).style.border = "");
+
+  // Validate each input
+  for (let f of fields) {
+    const input = document.getElementById(f.id);
+    const value = parseFloat(input.value);
+    const min = parseFloat(input.min);
+    const max = parseFloat(input.max);
+
+    if (isNaN(value)) {
+      invalidMessages.push(`${f.name} is required.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    if (value < min || value > max) {
+      invalidMessages.push(`${f.name} must be between ${min} and ${max}.`);
+      input.style.border = "2px solid red";
+      isValid = false;
+      continue;
+    }
+
+    data[f.key] = value;
+  }
+
+  if (!isValid) {
+    setResult('An_res', 'warn', invalidMessages.join('<br>'));
+    return;
+  }
+
+  // Send data to Flask API
+  fetch("http://localhost:5000/AnemiaPredict", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   })
-  .then(res => res.text())
-  .then(response => {
-    console.log("Response from Flask:", response);
-    if (response=== "Normocytic Anemia") setResult('An_res','crit','🚨 Normocytic Anemia Detected!');
-    else if (response=== "Microcytic Anemia") setResult('An_res','crit','🚨 Microcytic Anemia Detected!');
-    else setResult('An_res','ok','✅ No Anemia Detected!')
-  })
-  .catch(error => console.error("Error:", error));
+    .then(res => res.text())
+    .then(response => {
+      console.log("Response from Flask:", response);
+      if (response === "Normocytic Anemia") {
+        setResult('An_res','crit','🚨 Normocytic Anemia Detected!\n👨‍⚕️ Consult A Hematologist Immediately! 🩺🩹');
+      } else if (response === "Microcytic Anemia") {
+        setResult('An_res','crit','🚨 Microcytic Anemia Detected!\n👨‍⚕️ Consult A Hematologist Immediately! 🩺🩹');
+      } else {
+        setResult('An_res','ok','✅ No Anemia Detected!');
+      }
+    })
+    .catch(error => console.error("Error:", error));
 }
 
-// function checkTyphoid(){let widal=+t_widal.value;
-//   setResult('t_res',widal>160?'crit':widal>80?'warn':'ok',widal>160?'High Typhoid Risk':widal>80?'Moderate Typhoid Risk':'Low Typhoid Risk');}
+
+function checkTyphoid() {
+  const input = document.getElementById("t_widal");
+  const value = parseFloat(input.value);
+  const min = 0;
+  const max = 1000; // realistic extreme titer limit
+
+  // Reset border
+  input.style.border = "";
+
+  // Validate input
+  if (isNaN(value)) {
+    input.style.border = "2px solid red";
+    setResult('t_res', 'warn', 'Widal titer is required.');
+    return;
+  }
+  if (value < min || value > max) {
+    input.style.border = "2px solid red";
+    setResult('t_res', 'warn', `Widal titer must be between ${min} and ${max}.`);
+    return;
+  }
+
+  // Determine risk
+  let status, message;
+  if (value > 160) {
+    status = 'crit';
+    message = '🚨 High Typhoid Risk';
+  } else if (value > 80) {
+    status = 'warn';
+    message = '⚠️ Moderate Typhoid Risk';
+  } else {
+    status = 'ok';
+    message = '✅ Low Typhoid Risk';
+  }
+
+  setResult('t_res', status, message);
+}
+
 
 // function checkMalaria(){let para=+m_para.value;
 //   setResult('m_res',para>5000?'crit':para>1000?'warn':'ok',para>5000?'High Malaria Risk':para>1000?'Moderate Malaria Risk':'Low Malaria Risk');}
